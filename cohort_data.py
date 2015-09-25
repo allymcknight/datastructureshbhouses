@@ -24,7 +24,7 @@ def unique_houses(filename):
     # Code goes here
 
     print houses
-unique_houses("cohort_data.txt")
+
 
 
 def sort_by_cohort(filename):
@@ -38,20 +38,27 @@ def sort_by_cohort(filename):
 
     """
     cohort_info = open(filename)
+    tas = set()
+    all_students = []
+    winter_15 = []
+    spring_15 = []
+    summer_15 = []
     for line in cohort_info:
-        cohort_data = line.split("|")
+        stripped_line = line.strip()    
+        cohort_data = stripped_line.split("|")  
+        cohort_lady_name = cohort_data[0] + " " + cohort_data[1]
+        all_students.append(cohort_lady_name)
+        season = cohort_data[4]
+        if season == 'Winter 2015':
+            winter_15.append(cohort_lady_name)
+        if season == 'Spring 2015':
+            spring_15.append(cohort_lady_name)
+        if season == "Summer 2015":
+            summer_15.append(cohort_lady_name)
+        tas.add(cohort_data[3])
 
-        all_students = [cohort_data[0:2]]
-        winter_15 = [winter for winter in cohort_data if winter == "Winter 2015"]
-        spring_15 = [season for season in cohort_data if season == "Spring 2015"]
-        summer_15 = [season for season in cohort_data if season == "Summer 2015"]
-        tas = [cohort_data[3]]
-        
 
     # Code goes here
-
-    return all_students
-
 
 def students_by_house(filename):
     """TODO: Sort students by house.
@@ -78,12 +85,34 @@ def students_by_house(filename):
     dumbledores_army = []
     order_of_the_phoenix = []
     ravenclaw = []
-    tas = []
+    tas = set()
+    cohort_info = open(filename)
+    for line in cohort_info:
+        stripped_line = line.strip()    
+        cohort_data = stripped_line.split("|")  
+        cohort_lady_name = cohort_data[1]
+        if cohort_data[3] != "":
+            tas.add(cohort_data[3])
+        if cohort_data[2] == "Gryffindor":
+            gryffindor.append(cohort_lady_name)
+        if cohort_data[2] == "Hufflepuff":
+            hufflepuff.append(cohort_lady_name)
+        if cohort_data[2] == "Slytherin":
+            slytherin.append(cohort_lady_name)
+        if cohort_data[2] == "Ravenclaw":
+            ravenclaw.append(cohort_lady_name)
+        if cohort_data[2] == "Dumbledore's Army":
+            dumbledores_army.append(cohort_lady_name)
+        if cohort_data[2] == "Order of the Phoenix":
+            order_of_the_phoenix.append(cohort_lady_name)
+    list_o_lists = [gryffindor, hufflepuff, ravenclaw, slytherin, order_of_the_phoenix, dumbledores_army, tas]        
 
-    # Code goes here
 
-    return all_students
+    
 
+    return list_o_lists
+
+students_by_house("cohort_data.txt")
 
 def all_students_tuple_list(filename):
     """TODO: Create a list of tuples of student data.
