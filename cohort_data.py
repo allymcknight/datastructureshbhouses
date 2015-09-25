@@ -125,12 +125,18 @@ def all_students_tuple_list(filename):
                 # ...
             ]
     """
+    cohort_info = open(filename)
+    student_tuple_list =[]
+    for line in cohort_info:
+        stripped_line = line.strip()
+        student_data = stripped_line.split("|")
+        student_tuple =(student_data[0],student_data[1], student_data[2], student_data[3], student_data[4])
+        student_tuple_list.append(student_tuple)
 
-    student_list = []
 
     # Code goes here
 
-    return student_list
+    print student_tuple_list
 
 
 def find_cohort_by_student_name(student_list):
