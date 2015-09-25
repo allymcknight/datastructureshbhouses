@@ -136,8 +136,9 @@ def all_students_tuple_list(filename):
 
     # Code goes here
 
-    print student_tuple_list
+    return student_tuple_list
 
+all_students_tuple_list("cohort_data.txt")
 
 def find_cohort_by_student_name(student_list):
     """TODO: Given full name, return student's cohort.
@@ -146,10 +147,16 @@ def find_cohort_by_student_name(student_list):
     function that, given a first and last name, returns that student's cohort, or returns
     'Student not found.' when appropriate. """
 
-    # Code goes here
+    inputted_first_name = raw_input("Please insert student first name:")
+    inputted_last_name = raw_input("Please insert student last name:")
+    student_info = all_students_tuple_list("cohort_data.txt")
+    for each_student in student_info:
+        if (inputted_first_name == each_student[0]) and (inputted_last_name == each_student[1]):
+            return each_student[4]
 
     return "Student not found."
 
+find_cohort_by_student_name("cohort_data.txt")
 
 ##########################################################################################
 # Further Study Questions
